@@ -12,6 +12,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "tb_usuario")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Usuario {
 
     @Id

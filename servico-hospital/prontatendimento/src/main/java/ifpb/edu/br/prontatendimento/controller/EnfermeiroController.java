@@ -51,9 +51,28 @@ public class EnfermeiroController {
         }
     }
 
-    /**
-     * TODO: put(id) e delete(id)
-     *
-     * */
+    @PutMapping("/{id}")
+    public ResponseEntity<Enfermeiro> put(@PathVariable(value = "id") Integer id, @RequestBody Enfermeiro newEnfermeiro){
+        Optional<Enfermeiro> oldEnfermeiro = _enfermeiroRepository.findById(id);
+        if (oldEnfermeiro.isPresent()){
+            Enfermeiro enfermeiro = oldEnfermeiro.get();
+            enfermeiro.setCoren(newEnfermeiro.getCoren());
+            _enfermeiroRepository.save(enfermeiro);
+            return new ResponseEntity<Enfermeiro>(enfermeiro, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable(value = "id")  Integer  id){
+        Optional<Enfermeiro> enfermeiro = _enfermeiroRepository.findById(id);
+        if (enfermeiro.isPresent()){
+            _enfermeiroRepository.delete(enfermeiro.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }
