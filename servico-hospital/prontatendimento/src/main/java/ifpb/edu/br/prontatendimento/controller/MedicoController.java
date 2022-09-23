@@ -1,10 +1,9 @@
 package ifpb.edu.br.prontatendimento.controller;
 
-import ifpb.edu.br.prontatendimento.model.Enfermeiro;
 import ifpb.edu.br.prontatendimento.model.Medico;
-import ifpb.edu.br.prontatendimento.model.Usuario;
+import ifpb.edu.br.prontatendimento.model.Pessoa;
 import ifpb.edu.br.prontatendimento.repository.MedicoRepository;
-import ifpb.edu.br.prontatendimento.repository.UsuarioRepository;
+import ifpb.edu.br.prontatendimento.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,7 @@ public class MedicoController {
     private MedicoRepository _medicoRepository;
 
     @Autowired
-    private UsuarioRepository _usuarioRepository;
+    private PessoaRepository _pessoaRepository;
 
     @GetMapping
     public List<Medico> get(){
@@ -34,21 +33,21 @@ public class MedicoController {
         if (medico.isPresent()){
             return new ResponseEntity<Medico>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping
     public ResponseEntity<Medico> post(@RequestBody Medico medico){
-        Optional<Usuario> usuarioOptional = _usuarioRepository.findById(medico.getUsuario().getId());
+        Optional<Pessoa> usuarioOptional = _pessoaRepository.findById(medico.getPessoa().getId());
         if (usuarioOptional.isPresent()) {
-            Usuario usuario = usuarioOptional.get();
-            medico.setUsuario(usuario);
+            Pessoa pessoa = usuarioOptional.get();
+            medico.setPessoa(pessoa);
             _medicoRepository.save(medico);
-            return new ResponseEntity<Medico>(medico, HttpStatus.OK);
+            return new ResponseEntity<Medico>(medico, HttpStatus.CREATED);
 
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -62,7 +61,7 @@ public class MedicoController {
             _medicoRepository.save(medico);
             return new ResponseEntity<Medico>(medico, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -73,7 +72,7 @@ public class MedicoController {
             _medicoRepository.delete(medico.get());
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

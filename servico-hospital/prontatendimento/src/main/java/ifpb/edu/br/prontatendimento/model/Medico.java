@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_medico")
-public class Medico extends Usuario{
+public class Medico extends Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_medico")
@@ -25,6 +25,6 @@ public class Medico extends Usuario{
 
     @OneToOne
     @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    private Pessoa pessoa;
 
 }

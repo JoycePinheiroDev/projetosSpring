@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "tb_usuario")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Usuario {
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
