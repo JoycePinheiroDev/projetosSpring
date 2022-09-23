@@ -1,9 +1,9 @@
 package ifpb.edu.br.prontatendimento.controller;
 
 import ifpb.edu.br.prontatendimento.model.Endereco;
-import ifpb.edu.br.prontatendimento.model.Paciente;
+import ifpb.edu.br.prontatendimento.model.Pessoa;
 import ifpb.edu.br.prontatendimento.repository.EnderecoRepository;
-import ifpb.edu.br.prontatendimento.repository.PacienteRepository;
+import ifpb.edu.br.prontatendimento.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class EnderecoController {
     private EnderecoRepository _enderecoRepository;
 
     @Autowired
-    private PacienteRepository _pacienteRepository;
+    private PessoaRepository _pessoaRepository;
 
     @GetMapping
     public List<Endereco> get(){
@@ -33,16 +33,16 @@ public class EnderecoController {
         if (endereco.isPresent()){
             return new ResponseEntity<Endereco>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
     public ResponseEntity<Endereco> post(@RequestBody Endereco endereco){
-        Optional<Paciente> pacienteOptional = _pacienteRepository.findById(endereco.getPaciente().getId());
-        if (pacienteOptional.isPresent()){
-            Paciente paciente = pacienteOptional.get();
-            endereco.setPaciente(paciente);
+        Optional<Pessoa> pessoaOptional = _pessoaRepository.findById(endereco.getPessoa().getId());
+        if (pessoaOptional.isPresent()){
+            Pessoa pessoa = pessoaOptional.get();
+            endereco.setPessoa(pessoa);
             _enderecoRepository.save(endereco);
             return new ResponseEntity<Endereco>(endereco, HttpStatus.CREATED);
         } else {
@@ -63,7 +63,7 @@ public class EnderecoController {
             _enderecoRepository.save(endereco);
             return new ResponseEntity<Endereco>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

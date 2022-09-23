@@ -28,12 +28,9 @@ public class PessoaController {
         if(pessoa.isPresent())
             return new ResponseEntity<Pessoa>(pessoa.get(), HttpStatus.OK);
         else
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    /**
-     * TODO: Criar a verificação se já existe o usuário na base
-     * */
     @PostMapping
     public Pessoa post(@RequestBody Pessoa pessoa){
         return _pessoaRepository.save(pessoa);
@@ -53,7 +50,7 @@ public class PessoaController {
             return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
         }
         else
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 

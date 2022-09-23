@@ -24,7 +24,7 @@ public class Medico extends Pessoa {
     private String especialidade;
 
     @OneToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
 
 }

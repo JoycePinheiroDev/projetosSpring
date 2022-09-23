@@ -33,7 +33,7 @@ public class MedicoController {
         if (medico.isPresent()){
             return new ResponseEntity<Medico>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -61,7 +61,7 @@ public class MedicoController {
             _medicoRepository.save(medico);
             return new ResponseEntity<Medico>(medico, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

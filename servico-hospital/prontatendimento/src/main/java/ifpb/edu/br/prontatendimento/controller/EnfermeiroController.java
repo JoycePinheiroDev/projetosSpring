@@ -33,7 +33,7 @@ public class EnfermeiroController {
         if (enfermeiro.isPresent()){
             return new ResponseEntity<Enfermeiro>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -60,7 +60,7 @@ public class EnfermeiroController {
             _enfermeiroRepository.save(enfermeiro);
             return new ResponseEntity<Enfermeiro>(enfermeiro, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -71,7 +71,7 @@ public class EnfermeiroController {
             _enfermeiroRepository.delete(enfermeiro.get());
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

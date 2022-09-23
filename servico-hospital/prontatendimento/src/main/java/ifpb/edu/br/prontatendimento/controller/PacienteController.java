@@ -32,7 +32,7 @@ public class PacienteController {
         if(paciente.isPresent()){
             return new ResponseEntity<Paciente>(paciente.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -59,7 +59,7 @@ public class PacienteController {
             _pacienteRepository.save(paciente);
             return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }

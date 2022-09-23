@@ -33,7 +33,7 @@ public class Endereco {
     private String estado;
 
     @OneToOne
-    @JoinColumn(name = "id_paciente", nullable = false)
-    private Paciente paciente;
+    @JoinColumn(name = "id_pessoa", nullable = false)
+    private Pessoa pessoa;
 
 }
