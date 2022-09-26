@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tb_enfermeiro")
 public class Enfermeiro extends Pessoa {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_paciente")

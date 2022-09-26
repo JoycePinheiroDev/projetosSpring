@@ -23,13 +23,13 @@ public class Pessoa {
     @Column(name = "nome_usuario")
     private String nome;
 
-    @Column(name = "endereco_usuario")
-    private String endereco;
-
     @Column(name = "nascimento_usuario")
     private Date data_nascimento;
 
     @Column(name = "telefone_usuario")
     private String telefone;
+
+    @Column(name = "cpf_usuario")
+    private String cpf;
 
 }
